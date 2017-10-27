@@ -20,6 +20,7 @@ After completion of analysis, the demultiplexed subreads are found in the  resul
 demultiplex.0-1.fastq.gz will contain the subreads recognized by the forward and reverse barcodes from barcode1 (see example barcode.fasta)
 demultiplex.0-1.fastq.gz will contain the subreads recognized by the forward and reverse barcodes from barcode2.(see example barcode.fasta)
 
+The cluster used is SLURM here. If you use a different cluster, change the path to the cluster type in the lib/preset.xml file after the line containing cluster_manager.
 
 ## requirements
 
