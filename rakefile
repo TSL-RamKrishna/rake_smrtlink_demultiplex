@@ -1,0 +1,19 @@
+ENV["projectdir"] ? @projectdir = ENV["projectdir"] : @projectdir = "Demultiplex"
+ENV["barcode"] ? @barcode = ENV["barcode"] : @barcode = "False"
+ENV["inputfofn"] ? @inputfofn =ENV["inputfofn"] : nil
+
+directory "lib"
+
+file "lib/subreads.xml" => ["lib", "#{@inputfofn}"] do
+  sh "source smrtlink-4.0.0.190159; dataset create --type SubreadSet --name subreads lib/subreads.xml #{@inputfofn}"
+end
+
+file "lib/barcodes.xml" => ["lib", "#{@barcode}"] do
+  sh "source smrtlink-4.0.0.190159; dataset create --type BarcodeSet --name barcodes lib/barcodes.xml #{@barcode}"
+end
+
+task :run_smrtlink  => ["lib/subreads.xml", "lib/barcodes.xml"] do
+  sh "source smrtlink-4.0.0.190159; pbsmrtpipe pipeline-id -o #{@projectdir} -e eid_barcode:lib/barcodes.xml -e eid_subread:lib/subreads.xml --preset-xml /tsl/software/testing/smrtlink/4.0.0.190159/x86_64/lib/workflow_options_preset.xml --preset-xml /tsl/software/testing/smrtlink/4.0.0.190159/x86_64/lib/barcode_split_option.xml pbsmrtpipe.pipelines.sa3_ds_barcode && bash collect_barcodes.sh #{@projectdir}"
+end
+
+task :default => [:run_smrtlink]
