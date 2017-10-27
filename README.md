@@ -1,7 +1,12 @@
 ## Introduction
 
 This is a ruby rake script to demutiplex the Pacbio raw subread data by the barcodes used. Demultiplexing the subreads requires some input files. 
-1) inputfofn - This input file should contain the absolute paths to the subreads.bam files from Pacbio Sequel data.
+1) inputfofn - This input file should contain the absolute paths to the subreads.bam files from Pacbio Sequel data. For e.g
+```
+/Raw_reads/A11_1/m160821_044615_42165_c101089132550000001823241503091760_s1_p0.subreads.bam
+/Raw_reads/A01_1/m160821_044615_42165_c101089132550000001823241503091760_s1_p0.subreads.bam
+/Raw_reads/A02_1/m160821_044615_42165_c101089132550000001823241503091760_s1_p0.subreads.bam
+```
 2) barcodes.fasta - This input fasta format file should contain the barcodes. Forward barcode should follow the reverse barcode in the fasta file. For. e.g
 	
 ```
