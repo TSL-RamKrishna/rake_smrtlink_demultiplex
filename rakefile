@@ -13,7 +13,7 @@ file "lib/barcodes.xml" => ["lib", "#{@barcode}"] do
 end
 
 task :run_smrtlink  => ["lib/subreads.xml", "lib/barcodes.xml"] do
-  sh "source smrtlink-4.0.0.190159; pbsmrtpipe pipeline-id -o #{@projectdir} -e eid_barcode:lib/barcodes.xml -e eid_subread:lib/subreads.xml --preset-xml /tsl/software/testing/smrtlink/4.0.0.190159/x86_64/lib/workflow_options_preset.xml --preset-xml /tsl/software/testing/smrtlink/4.0.0.190159/x86_64/lib/barcode_split_option.xml pbsmrtpipe.pipelines.sa3_ds_barcode && bash collect_barcodes.sh #{@projectdir}"
+  sh "source smrtlink-4.0.0.190159; pbsmrtpipe pipeline-id -o #{@projectdir} -e eid_barcode:lib/barcodes.xml -e eid_subread:lib/subreads.xml --preset-xml /tsl/software/testing/smrtlink/4.0.0.190159/x86_64/lib/workflow_options_preset.xml --preset-xml /tsl/software/testing/smrtlink/4.0.0.190159/x86_64/lib/barcode_split_option.xml pbsmrtpipe.pipelines.sa3_ds_barcode && bash scripts/collect_barcodes.sh #{@projectdir}"
 end
 
 task :default => [:run_smrtlink]
